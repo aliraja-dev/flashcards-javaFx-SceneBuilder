@@ -1,3 +1,17 @@
+# Flashcards - JavaFX , Scene Builder, Serialized Persistence JAVA IO API
+
+#### Main Scene that will show all the Decks in Flash Card App
+
+![homepage](images/mainScene.png)
+
+#### Add, Edit & Delete Cards in a Deck
+
+![homepage](images/editorScene.png)
+
+#### Play cards in a deck
+
+![homepage](images/playerScene.png)
+
 ## Getting Started
 
 ### Revisions to launch.json
