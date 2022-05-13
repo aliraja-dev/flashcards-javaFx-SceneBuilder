@@ -1,4 +1,4 @@
-package main;
+package main.editor;
 
 public class EditorController {
 

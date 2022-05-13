@@ -3,40 +3,34 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="48.0" prefHeight="351.0" prefWidth="586.0">
+      <SplitPane layoutX="14.0" layoutY="48.0" prefHeight="351.0" prefWidth="586.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="179.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="553.0">
                <children>
-                  <ListView layoutY="4.0" prefHeight="342.0" prefWidth="171.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="375.0">
-               <children>
-                  <SplitPane dividerPositions="0.5" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="303.0" prefWidth="389.0">
+                  <SplitPane dividerPositions="0.5" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="559.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="383.0">
                            <children>
-                              <TextArea prefHeight="148.0" prefWidth="398.0" />
+                              <TextArea prefHeight="148.0" prefWidth="557.0" promptText="Add question here" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TextArea prefHeight="148.0" prefWidth="398.0" />
+                              <TextArea prefHeight="148.0" prefWidth="557.0" promptText="Add answer here" />
                            </children>
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <ButtonBar layoutX="193.0" layoutY="309.0" prefHeight="40.0" prefWidth="200.0">
+                  <ButtonBar layoutX="365.0" layoutY="304.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
+                        <Button mnemonicParsing="false" text="Edit" />
                       <Button mnemonicParsing="false" text="Save" />
                     </buttons>
                   </ButtonBar>
@@ -46,13 +40,12 @@
       </SplitPane>
       <ButtonBar layoutX="416.0" layoutY="6.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
         <buttons>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="284.0" text="All Decks" />
           <Button mnemonicParsing="false" text="Add Card" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Flash Card App">
+      <Label layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="187.0" text="Flash Card App - Editor">
          <font>
-            <Font size="21.0" />
+            <Font size="18.0" />
          </font>
       </Label>
    </children>
