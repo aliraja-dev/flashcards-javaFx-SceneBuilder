@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.player.PlayerController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="48.0" prefHeight="351.0" prefWidth="586.0">
          <items>
@@ -40,12 +40,12 @@
       </SplitPane>
       <ButtonBar layoutX="416.0" layoutY="6.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
          <buttons>
-            <Button mnemonicParsing="false" text="Edit Card" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="284.0" text="All Decks" />
-            <Button mnemonicParsing="false" text="Add Card" />
+            <Button fx:id="backToMain" mnemonicParsing="false" onAction="#switchToMain" text="Back" />
+            <Button fx:id="editCard" mnemonicParsing="false" onAction="#switchToEditor" prefHeight="25.0" prefWidth="284.0" text="Edit" />
+            <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" text="Add Card" />
          </buttons>
       </ButtonBar>
-      <Label layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Flash Card App">
+      <Label fx:id="title" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
          <font>
             <Font size="21.0" />
          </font>
