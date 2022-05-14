@@ -22,6 +22,7 @@ public class PlayerController {
     private boolean showAnswer = false;
     private Card selectedCard;
     private Deck deck;
+    private boolean updated;
     @FXML
     Label deckTitle;
     @FXML
@@ -32,12 +33,31 @@ public class PlayerController {
     Button toggleAnswerBtn;
 
     public void switchToMain(ActionEvent event) throws Exception {
+
+        // todo implement update to update decks in the main screen after edit has been
+        // made to a deck
         System.out.println("Switch to main");
         root = FXMLLoader.load(getClass().getResource("/resources/fxml/main.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        // TODO if we need to pass udpated state to Main Controller
+
+        // FXMLLoader loader = new
+        // FXMLLoader(getClass().getResource("/resources/fxml/main.fxml"));
+        // try {
+        // root = loader.load();
+        // EditorController controller = loader.getController();
+        // controller.initEditor(deck, this.updated);
+        // stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // scene = new Scene(root);
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (Exception e) {
+        // System.out.println("Error Loading main");
+        // e.printStackTrace();
+        // }
     }
 
     public void switchToEditor(ActionEvent event) {
@@ -84,6 +104,18 @@ public class PlayerController {
     public void initPlayer(Deck deck) {
         this.deck = deck;
         System.out.println("FROM PLAYER " + deck.toString());
+        deckTitle.setText(deck.getTitle());
+        cardList.getItems().addAll(deck.getCards());
+        cardList.setPlaceholder(new Label("No cards found"));
+
+        attachEventHandlers();
+    }
+
+    // ! updated deck from editor
+    public void initPlayer(Deck deck, boolean updated) {
+        this.deck = deck;
+        this.updated = updated;
+        System.out.println("Revised DECK " + deck.toString());
         deckTitle.setText(deck.getTitle());
         cardList.getItems().addAll(deck.getCards());
         cardList.setPlaceholder(new Label("No cards found"));
