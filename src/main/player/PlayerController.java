@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.editor.EditorController;
 import models.Card;
 import models.Deck;
 
@@ -39,13 +40,21 @@ public class PlayerController {
         stage.show();
     }
 
-    public void switchToEditor(ActionEvent event) throws Exception {
+    public void switchToEditor(ActionEvent event) {
         System.out.println("Switch to editor");
-        root = FXMLLoader.load(getClass().getResource("/resources/fxml/editor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/editor.fxml"));
+        try {
+            root = loader.load();
+            EditorController controller = loader.getController();
+            controller.initEditor(deck, selectedCard);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Error loading editor.fxml");
+            e.printStackTrace();
+        }
     }
 
     public void addCardToDeck(ActionEvent event) throws Exception {
@@ -80,12 +89,14 @@ public class PlayerController {
 
     public void toggleAnswer(ActionEvent event) {
         showAnswer = !showAnswer;
-        if (showAnswer) {
+        if (showAnswer && selectedCard != null) {
             questionLabel.setText(selectedCard.getAnswer());
             toggleAnswerBtn.setText("Hide Answer");
-        } else {
+        } else if (selectedCard != null) {
             questionLabel.setText(selectedCard.getQuestion());
             toggleAnswerBtn.setText("Show Answer");
+        } else { // no card selected}
+            System.out.println("No card selected");
         }
     }
 }

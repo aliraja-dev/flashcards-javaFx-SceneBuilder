@@ -18,12 +18,12 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="383.0">
                            <children>
-                              <TextArea prefHeight="148.0" prefWidth="557.0" promptText="Add question here" />
+                              <TextArea fx:id="questionTextArea" prefHeight="148.0" prefWidth="557.0" promptText="Add question here" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TextArea prefHeight="148.0" prefWidth="557.0" promptText="Add answer here" />
+                              <TextArea fx:id="answerTextArea" prefHeight="148.0" prefWidth="557.0" promptText="Add answer here" />
                            </children>
                         </AnchorPane>
                     </items>
