@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import services.DataService;
 
 public class MainController {
     private Parent root;
@@ -23,6 +24,8 @@ public class MainController {
         String javafxVersion = System.getProperty("javafx.version");
         // label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " +
         // javaVersion + ".");
+        DataService dataService = new DataService();
+        System.out.println(dataService.ReadFromFile().toString());
     }
 
     public void switchToPlayer(MouseEvent event) throws Exception {
