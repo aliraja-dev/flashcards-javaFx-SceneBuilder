@@ -42,7 +42,7 @@
           <Button fx:id="backToDeck" mnemonicParsing="false" onAction="#switchToPlayer" text="Back" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="187.0" text="Flash Card App - Editor">
+      <Label fx:id="mainLabel" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="187.0" text="Flash Card App - Editor">
          <font>
             <Font size="18.0" />
          </font>

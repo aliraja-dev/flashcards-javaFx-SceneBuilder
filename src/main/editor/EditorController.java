@@ -25,6 +25,8 @@ public class EditorController {
     TextArea questionTextArea;
     @FXML
     TextArea answerTextArea;
+    @FXML
+    Label mainLabel;
 
     public void backToDeck(ActionEvent event) {
         // todo implement back to deck from the editor
@@ -60,6 +62,16 @@ public class EditorController {
         this.answer = selectedCard.getAnswer();
         questionTextArea.setText(selectedCard.getQuestion());
         answerTextArea.setText(selectedCard.getAnswer());
+        mainLabel.setText("Edit Card");
+    }
 
+    public void initEditor(Deck deck) {
+        // todo implement init editor
+        this.deck = deck;
+        this.question = "";
+        this.answer = "";
+        questionTextArea.setText(this.question);
+        answerTextArea.setText(this.answer);
+        mainLabel.setText("Create New Card");
     }
 }

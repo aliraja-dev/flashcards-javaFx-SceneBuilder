@@ -41,12 +41,35 @@ public class PlayerController {
     }
 
     public void switchToEditor(ActionEvent event) {
-        System.out.println("Switch to editor");
+
+        if (selectedCard != null) {
+            System.out.println("Switch to editor");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/editor.fxml"));
+            try {
+                root = loader.load();
+                EditorController controller = loader.getController();
+                controller.initEditor(deck, selectedCard);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                System.out.println("Error loading editor.fxml");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Select a card first");
+        }
+    }
+
+    public void addCardToDeck(ActionEvent event) throws Exception {
+        // todo implement add card to deck
+        System.out.println("Create New Card ");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/editor.fxml"));
         try {
             root = loader.load();
             EditorController controller = loader.getController();
-            controller.initEditor(deck, selectedCard);
+            controller.initEditor(deck);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -55,16 +78,7 @@ public class PlayerController {
             System.out.println("Error loading editor.fxml");
             e.printStackTrace();
         }
-    }
 
-    public void addCardToDeck(ActionEvent event) throws Exception {
-        // todo implement add card to deck
-        System.out.println("Switch to add new card");
-        root = FXMLLoader.load(getClass().getResource("/resources/fxml/editor.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void initPlayer(Deck deck) {
@@ -84,6 +98,7 @@ public class PlayerController {
             System.out.println(card.getQuestion());
             selectedCard = card;
             questionLabel.setText(card.getQuestion());
+            this.toggleAnswer();
         });
     }
 
@@ -98,5 +113,10 @@ public class PlayerController {
         } else { // no card selected}
             System.out.println("No card selected");
         }
+    }
+
+    public void toggleAnswer() {
+        showAnswer = !showAnswer;
+        toggleAnswerBtn.setText("Show Answer");
     }
 }
