@@ -14,7 +14,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="179.0">
                <children>
-                  <ListView layoutY="4.0" prefHeight="342.0" prefWidth="171.0" />
+                  <ListView fx:id="cardList" layoutY="4.0" prefHeight="342.0" prefWidth="171.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="375.0">
@@ -23,14 +23,14 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label layoutX="8.0" prefHeight="301.0" prefWidth="387.0" text="Question here" textAlignment="CENTER" />
+                              <Label fx:id="questionLabel" layoutX="8.0" prefHeight="301.0" prefWidth="387.0" text="Question here" textAlignment="CENTER" />
                            </children>
                         </AnchorPane>
                      </items>
                   </SplitPane>
                   <ButtonBar layoutX="6.0" layoutY="309.0" prefHeight="40.0" prefWidth="387.0">
                      <buttons>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Show answer" />
+                        <Button fx:id="toggleAnswerBtn" mnemonicParsing="false" onAction="#toggleAnswer" prefHeight="25.0" prefWidth="110.0" text="Show answer" />
                         <Button mnemonicParsing="false" text="Next" />
                      </buttons>
                   </ButtonBar>
@@ -45,7 +45,7 @@
             <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" text="Add Card" />
          </buttons>
       </ButtonBar>
-      <Label fx:id="title" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
+      <Label fx:id="deckTitle" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
          <font>
             <Font size="21.0" />
          </font>

@@ -6,14 +6,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.Card;
+import models.Deck;
 
 public class PlayerController {
     private Parent root;
     private Stage stage;
     private Scene scene;
+    private boolean showAnswer = false;
+    private Card selectedCard;
+    private Deck deck;
+    @FXML
+    Label deckTitle;
+    @FXML
+    ListView<Card> cardList;
+    @FXML
+    Label questionLabel;
+    @FXML
+    Button toggleAnswerBtn;
 
     public void switchToMain(ActionEvent event) throws Exception {
         System.out.println("Switch to main");
@@ -41,5 +56,36 @@ public class PlayerController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void initPlayer(Deck deck) {
+        this.deck = deck;
+        System.out.println("FROM PLAYER " + deck.toString());
+        deckTitle.setText(deck.getTitle());
+        cardList.getItems().addAll(deck.getCards());
+        cardList.setPlaceholder(new Label("No cards found"));
+
+        attachEventHandlers();
+    }
+
+    // * attach event handlers to card items in list
+    public void attachEventHandlers() {
+        cardList.setOnMouseClicked(event -> {
+            Card card = cardList.getSelectionModel().getSelectedItem();
+            System.out.println(card.getQuestion());
+            selectedCard = card;
+            questionLabel.setText(card.getQuestion());
+        });
+    }
+
+    public void toggleAnswer(ActionEvent event) {
+        showAnswer = !showAnswer;
+        if (showAnswer) {
+            questionLabel.setText(selectedCard.getAnswer());
+            toggleAnswerBtn.setText("Hide Answer");
+        } else {
+            questionLabel.setText(selectedCard.getQuestion());
+            toggleAnswerBtn.setText("Show Answer");
+        }
     }
 }
