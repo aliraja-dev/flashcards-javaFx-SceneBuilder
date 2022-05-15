@@ -1,6 +1,8 @@
 package models;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     private String question;
     private String answer;
 
