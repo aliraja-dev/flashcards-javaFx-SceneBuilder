@@ -12,6 +12,13 @@ public class Deck implements Serializable {
         this.cards = cards;
     }
 
+    // when creating a new Deck, we need to pass in the title and initialize the
+    // cards arraylist
+    public Deck(String title) {
+        this.title = title;
+        this.cards = new ArrayList<Card>();
+    }
+
     public Deck() {
         this(null, null);
     }

@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -53,7 +54,7 @@ public class MainController {
     public void attachEventHandlers() {
         deckList.setOnMouseClicked(event -> {
             Deck deck = deckList.getSelectionModel().getSelectedItem();
-            System.out.println(deck.getTitle());
+            System.out.println(deck.getTitle() != null ? deck.getTitle() : "No deck Available");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
             try {
                 Parent root = loader.load();
@@ -76,14 +77,14 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
             Parent root = loader.load();
             AddEditDeckController addEditDeckController = loader.getController();
-            String title = addEditDeckController.getDeckName();
-            Stage stage = new Stage();
-            stage.setTitle("Add Deck");
-            stage.initOwner(primaryStage);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-            primaryStage.setOpacity(0.5);
+
+            Stage modal = new Stage();
+            modal.setTitle("Add Deck");
+            modal.initOwner(primaryStage);
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.setScene(new Scene(root));
+            addEditDeckController.initStage(modal);
+            modal.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
