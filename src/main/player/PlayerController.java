@@ -42,22 +42,7 @@ public class PlayerController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        // TODO if we need to pass udpated state to Main Controller
 
-        // FXMLLoader loader = new
-        // FXMLLoader(getClass().getResource("/resources/fxml/main.fxml"));
-        // try {
-        // root = loader.load();
-        // EditorController controller = loader.getController();
-        // controller.initEditor(deck, this.updated);
-        // stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-        // } catch (Exception e) {
-        // System.out.println("Error Loading main");
-        // e.printStackTrace();
-        // }
     }
 
     public void switchToEditor(ActionEvent event) {
@@ -101,14 +86,17 @@ public class PlayerController {
 
     }
 
+    // Loading Player from Main Controller
     public void initPlayer(Deck deck) {
         this.deck = deck;
-        System.out.println("FROM PLAYER " + deck.toString());
-        deckTitle.setText(deck.getTitle());
-        cardList.getItems().addAll(deck.getCards());
-        cardList.setPlaceholder(new Label("No cards found"));
-
-        attachEventHandlers();
+        if (deck != null) {
+            deckTitle.setText(deck.getTitle());
+            cardList.getItems().addAll(deck.getCards());
+            attachEventHandlers();
+        } else {
+            cardList.setPlaceholder(new Label("No cards found"));
+            System.out.println("No Cards Available");
+        }
     }
 
     // ! updated deck from editor

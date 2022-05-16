@@ -19,7 +19,6 @@ public class Main extends Application {
         controller.setPrimaryStage(primaryStage);
         primaryStage.setTitle("Flash cards");
         primaryStage.setScene(new Scene(root));
-
         primaryStage.show();
     }
 

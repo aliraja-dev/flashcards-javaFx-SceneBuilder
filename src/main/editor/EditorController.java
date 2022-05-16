@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import main.player.PlayerController;
 import models.Card;
 import models.Deck;
+import services.DataService;
 
 public class EditorController {
     private Parent root;
@@ -24,6 +25,8 @@ public class EditorController {
     private String question;
     private String answer;
     private Card selectedCard;
+    private DataService ds = DataService.getInstance();
+    private ArrayList<Deck> decks = ds.getDecks();
     @FXML
     TextArea questionTextArea;
     @FXML
@@ -59,6 +62,10 @@ public class EditorController {
             System.out.println("New card");
             this.deck.addCard(new Card(this.question, this.answer));
             System.out.println("Saved card " + this.question + " " + this.answer);
+            // // update Deck in File
+            // int indexOfDeck = this.decks.indexOf(this.deck);
+            // this.decks.set(indexOfDeck, this.deck);
+            // this.ds.setDecks(this.decks);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
             try {
                 Parent root = loader.load();
@@ -76,6 +83,10 @@ public class EditorController {
             ArrayList<Card> cards = this.deck.getCards();
             int index = cards.indexOf(selectedCard);
             cards.set(index, new Card(this.question, this.answer));
+            // update Deck in File
+            // int indexOfDeck = this.decks.indexOf(this.deck);
+            // this.decks.set(indexOfDeck, this.deck);
+            // this.ds.setDecks(this.decks);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
             try {
                 Parent root = loader.load();

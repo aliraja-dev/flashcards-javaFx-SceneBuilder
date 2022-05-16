@@ -12,6 +12,9 @@ import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javafx.scene.chart.PieChart.Data;
+
 import java.util.ArrayList;
 
 import models.Card;
@@ -20,8 +23,13 @@ public class DataService {
 
     ArrayList<Deck> decks = new ArrayList<Deck>();
     ArrayList<Card> cards = new ArrayList<Card>();
+    private final static DataService INSTANCE = new DataService();
 
-    public DataService() {
+    public static DataService getInstance() {
+        return INSTANCE;
+    }
+
+    private DataService() {
         // cards.add(new Card("What is the capital of Alaska?", "Juneau"));
         // cards.add(new Card("What is the capital of New York?", "Albany"));
         // cards.add(new Card("What is the capital of Texas?", "Austin"));
@@ -48,7 +56,7 @@ public class DataService {
         // decks.add(deck2);
     }
 
-    public void writeToFile(ArrayList<Deck> decks) {
+    public void setDecks(ArrayList<Deck> decks) {
         // TODO save to file all the decks, using object serialization
 
         try {
@@ -62,12 +70,16 @@ public class DataService {
 
     }
 
-    public void writeToFile(Deck deck) {
+    public void setDecks(Deck deck) {
         this.decks.add(deck);
-        writeToFile(this.decks);
+        setDecks(this.decks);
     }
 
-    public ArrayList<Deck> ReadFromFile() {
+    public void setDecks() {
+        setDecks(this.decks);
+    }
+
+    public ArrayList<Deck> getDecks() {
         // TODO load from file
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream("decks.ser"));

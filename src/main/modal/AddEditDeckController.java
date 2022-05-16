@@ -22,9 +22,9 @@ public class AddEditDeckController {
 
     public void onSave(ActionEvent event) {
         System.out.println("Saving");
-        DataService ds = new DataService();
+        DataService ds = DataService.getInstance();
         Deck deck = new Deck(addTitleField.getText());
-        ds.writeToFile(deck);
+        ds.setDecks(deck);
         modal.close();
         // ACcess Deck Modal and do the title edit or add
         // close this window and revert to main window.
