@@ -36,9 +36,14 @@ public class MainController {
         // javaVersion + ".");
         dataService = new DataService();
         decks = dataService.ReadFromFile();
-        System.out.println(dataService.ReadFromFile().toString());
-        deckList.getItems().addAll(decks);
-        deckList.setPlaceholder(new Label("No decks found"));
+        if (decks != null) {
+            System.out.println(decks);
+            deckList.getItems().addAll(decks);
+
+        } else {
+            System.out.println("No decks found");
+            deckList.setPlaceholder(new Label("No decks found"));
+        }
 
         attachEventHandlers();
     }

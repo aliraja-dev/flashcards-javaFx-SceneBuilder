@@ -4,8 +4,12 @@ import models.Deck;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -44,10 +48,27 @@ public class DataService {
     public void writeToFile(ArrayList<Deck> decks) {
         // TODO save to file all the decks, using object serialization
 
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("decks.ser"));
+            os.writeObject(decks);
+        } catch (Exception e) {
+            System.out.println("Error Serializing decks");
+            e.printStackTrace();
+        }
+
     }
 
     public ArrayList<Deck> ReadFromFile() {
         // TODO load from file
-        return this.decks; // dummy data
+        try {
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream("decks.ser"));
+            ArrayList<Deck> decks = (ArrayList<Deck>) is.readObject();
+            return this.decks; // dummy data
+        } catch (Exception e) {
+            System.out.println("Error Deserializing decks");
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }
