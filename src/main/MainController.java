@@ -12,13 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.modal.AddEditDeckController;
 import main.player.PlayerController;
 import models.Deck;
 import services.DataService;
 
 public class MainController {
-    private Parent root;
+    private Stage primaryStage;
     private Stage stage;
     private Scene scene;
     private DataService dataService;
@@ -48,10 +50,6 @@ public class MainController {
         attachEventHandlers();
     }
 
-    public void addNewDeck(ActionEvent event) {
-
-    }
-
     public void attachEventHandlers() {
         deckList.setOnMouseClicked(event -> {
             Deck deck = deckList.getSelectionModel().getSelectedItem();
@@ -69,6 +67,30 @@ public class MainController {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void addEditDeck(ActionEvent event) {
+        // todo show modal to add / edit deck name
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
+            Parent root = loader.load();
+            AddEditDeckController addEditDeckController = loader.getController();
+            String title = addEditDeckController.getDeckName();
+            Stage stage = new Stage();
+            stage.setTitle("Add Deck");
+            stage.initOwner(primaryStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            primaryStage.setOpacity(0.5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
 }

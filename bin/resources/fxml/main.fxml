@@ -19,7 +19,7 @@
       </Label>
       <ButtonBar layoutX="426.0" layoutY="16.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
          <buttons>
-            <Button fx:id="addNewDeck" mnemonicParsing="false" onAction="#addNewDeck" text="Add deck" />
+            <Button fx:id="addNewDeck" mnemonicParsing="false" onAction="#addEditDeck" text="Add deck" />
          </buttons>
       </ButtonBar>
    </children>
