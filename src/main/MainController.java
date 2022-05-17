@@ -24,7 +24,7 @@ import main.player.PlayerController;
 import models.Deck;
 import services.DataService;
 
-public class MainController implements Initializable {
+public class MainController {
     private Stage primaryStage;
     private Stage stage;
     private Scene scene;
@@ -36,8 +36,7 @@ public class MainController implements Initializable {
     @FXML
     private ListView<String> deckList;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         this.decks = this.ds.getDecks();
 
         if (this.decks != null) {
@@ -65,24 +64,32 @@ public class MainController implements Initializable {
     public void attachEventHandlers() {
         deckList.setOnMouseClicked(event -> {
             if (this.decks != null) {
-                Deck deck = deckList.getSelectionModel().getSelectedItem();
+                String title = deckList.getSelectionModel().getSelectedItem();
                 // System.out.println(deck.getTitle() != null ? deck.getTitle() : "No deck
                 // Available");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
-                try {
-                    Parent root = loader.load();
-                    PlayerController controller = loader.getController();
 
-                    controller.initPlayer(deck);
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                // todo check the title in the decks arraylist and send that as deck to the
+                // player controller
+                Deck selectedDeck = this.decks.stream().filter(deck -> title.equals(deck.getTitleOfDeck())).findAny()
+                        .orElse(null);
+
+                if (selectedDeck != null) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
+                    try {
+                        Parent root = loader.load();
+                        PlayerController controller = loader.getController();
+
+                        controller.initPlayer(selectedDeck);
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("No deck selected");
                 }
-            } else {
-                System.out.println("No Deck Available");
             }
         });
     }

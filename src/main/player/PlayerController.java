@@ -90,7 +90,7 @@ public class PlayerController {
     public void initPlayer(Deck deck) {
         this.deck = deck;
         if (deck != null) {
-            deckTitle.setText(deck.getTitle());
+            deckTitle.setText(deck.getTitleOfDeck());
             cardList.getItems().addAll(deck.getCards());
             attachEventHandlers();
         } else {
@@ -104,7 +104,7 @@ public class PlayerController {
         this.deck = deck;
         this.updated = updated;
         System.out.println("Revised DECK " + deck.toString());
-        deckTitle.setText(deck.getTitle());
+        deckTitle.setText(deck.getTitleOfDeck());
         cardList.getItems().addAll(deck.getCards());
         cardList.setPlaceholder(new Label("No cards found"));
 
