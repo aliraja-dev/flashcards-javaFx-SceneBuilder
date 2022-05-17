@@ -1,22 +1,27 @@
 package main.player;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.editor.EditorController;
 import models.Card;
 import models.Deck;
+import services.DataService;
 
 public class PlayerController {
     private Parent root;
@@ -25,6 +30,7 @@ public class PlayerController {
     private boolean showAnswer = false;
     private Card selectedCard;
     private Deck deck;
+    private DataService ds = DataService.getInstance();
 
     @FXML
     Label playerTitle;
@@ -98,13 +104,59 @@ public class PlayerController {
     }
 
     /**
+     * Delete the selected card
+     */
+    public void onDeleteCard(ActionEvent event) {
+        System.out.println("Delete Card");
+        if (this.selectedCard != null) {
+            this.deck.removeCard(selectedCard);
+            selectedCard = null;
+            // remove card from file and then read from file again to update UI
+            // * Read from File
+
+            ArrayList<Deck> tempDecks = this.ds.getDecks();
+            // * find using old deck in the tempDecks and then replace with revisedDeck
+            for (Deck d : tempDecks) {
+                if (d.getTitleOfDeck().equals(this.deck.getTitleOfDeck())) {
+                    tempDecks.remove(d);
+                    tempDecks.add(this.deck);
+                    break;
+                }
+            }
+            // * Save to File
+            this.ds.setDecks(tempDecks);
+
+            // todo move this to show cards method
+            if (this.deck != null) {
+                playerTitle.setText(deck.getTitleOfDeck());
+                // * Populate ListView with Questions from Deck
+                ArrayList<String> questions = new ArrayList<String>();
+                for (Card card : deck.getCards()) {
+                    questions.add(card.getQuestion());
+                }
+                ObservableList<String> observableList = FXCollections.observableArrayList(questions);
+                cardList.getItems().setAll(observableList);
+                cardList.setPlaceholder(new Text("No Cards in Deck"));
+                this.questionLabel.setText("No card Selected");
+                attachEventHandlers();
+
+            } else {
+                cardList.setPlaceholder(new Label("No cards found"));
+                System.out.println("No Cards Available");
+            }
+        } else {
+            System.out.println("Select a card first");
+        }
+    }
+
+    /**
      * Initialize the PlayerController
      * 
      * @param deck
      */
     public void initPlayer(Deck deck) {
         this.deck = deck;
-        if (deck != null) {
+        if (this.deck != null) {
             playerTitle.setText(deck.getTitleOfDeck());
             // * Populate ListView with Questions from Deck
             ArrayList<String> questions = new ArrayList<String>();
@@ -151,4 +203,5 @@ public class PlayerController {
         showAnswer = !showAnswer;
         toggleAnswerBtn.setText("Show Answer");
     }
+
 }

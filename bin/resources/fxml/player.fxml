@@ -41,6 +41,7 @@
       <ButtonBar layoutX="416.0" layoutY="6.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
          <buttons>
             <Button fx:id="backToMain" mnemonicParsing="false" onAction="#switchToMain" text="Back" />
+            <Button mnemonicParsing="false" onAction="#onDeleteCard" text="Delete" />
             <Button fx:id="editCard" mnemonicParsing="false" onAction="#switchToEditor" prefHeight="25.0" prefWidth="284.0" text="Edit" />
             <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" text="Add Card" />
          </buttons>
