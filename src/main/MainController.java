@@ -1,11 +1,15 @@
 package main;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +24,7 @@ import main.player.PlayerController;
 import models.Deck;
 import services.DataService;
 
-public class MainController {
+public class MainController implements Initializable {
     private Stage primaryStage;
     private Stage stage;
     private Scene scene;
@@ -30,14 +34,25 @@ public class MainController {
     @FXML
     private Label label;
     @FXML
-    private ListView<Deck> deckList;
+    private ListView<String> deckList;
 
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         this.decks = this.ds.getDecks();
 
         if (this.decks != null) {
             System.out.println(decks);
-            deckList.getItems().addAll(this.decks);
+            // TODO populate listview with Titles only
+            ArrayList<String> titles = new ArrayList<String>();
+            for (Deck deck : this.decks) {
+                titles.add(deck.getTitleOfDeck());
+            }
+            System.out.println(titles);
+
+            // todo convert arraylist to observable list
+
+            ObservableList<String> observableList = FXCollections.observableList(titles);
+            deckList.getItems().addAll(observableList);
 
         } else {
             System.out.println("No decks found");

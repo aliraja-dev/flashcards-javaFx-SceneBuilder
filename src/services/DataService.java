@@ -23,12 +23,15 @@ public class DataService {
 
     ArrayList<Deck> decks = new ArrayList<Deck>();
     ArrayList<Card> cards = new ArrayList<Card>();
+
+    // * implement singleton pattern
     private final static DataService INSTANCE = new DataService();
 
     public static DataService getInstance() {
         return INSTANCE;
     }
 
+    // Private Constructor - Singleton Pattern
     private DataService() {
         // cards.add(new Card("What is the capital of Alaska?", "Juneau"));
         // cards.add(new Card("What is the capital of New York?", "Albany"));
