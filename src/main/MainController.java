@@ -2,6 +2,7 @@ package main;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -30,7 +31,7 @@ public class MainController {
     private Scene scene;
     private DataService ds = DataService.getInstance();
     private ArrayList<Deck> decks;
-
+    private Deck selectedDeck;
     @FXML
     private Label label;
     @FXML
@@ -57,37 +58,22 @@ public class MainController {
         attachEventHandlers();
     }
 
+    /**
+     * On selecting a Deck, loads the card in the SelectedDeck instance Variable
+     */
     public void attachEventHandlers() {
-        // * Do this on MouseClick on ListView
         deckList.setOnMouseClicked(event -> {
             if (this.decks != null) {
                 String title = deckList.getSelectionModel().getSelectedItem();
-                Deck selectedDeck = this.decks.stream().filter(deck -> title.equals(deck.getTitleOfDeck())).findAny()
+                this.selectedDeck = this.decks.stream().filter(deck -> title.equals(deck.getTitleOfDeck())).findAny()
                         .orElse(null);
-
-                if (selectedDeck != null) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
-                    try {
-                        Parent root = loader.load();
-                        PlayerController controller = loader.getController();
-                        controller.initPlayer(selectedDeck);
-                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("No selected deck Available");
-                }
             } else {
                 System.out.println("No Decks Available");
             }
         });
     }
 
-    public void addEditDeck(ActionEvent event) {
+    public void addDeck(ActionEvent event) {
         // todo check again
 
         try {
@@ -104,6 +90,63 @@ public class MainController {
             initialize();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Edit Deck Title
+     * 
+     * @param primaryStage
+     * @param deck
+     */
+    public void onEditDeck(Stage primaryStage, Deck deck) {
+        // try {
+        // FXMLLoader loader = new
+        // FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
+        // Parent root = loader.load();
+        // AddEditDeckController addEditDeckController = loader.getController();
+        // Stage modal = new Stage();
+        // modal.setTitle("Edit Deck");
+        // modal.initOwner(primaryStage);
+        // modal.initModality(Modality.APPLICATION_MODAL);
+        // modal.setScene(new Scene(root));
+        // addEditDeckController.initModal(modal, deck);
+        // modal.showAndWait();
+        // initialize();
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
+    }
+
+    public void onDeleteDeck(ActionEvent event) {
+        // todo check again
+        if (this.selectedDeck != null) {
+            this.decks.remove(this.selectedDeck);
+            this.ds.setDecks(this.decks);
+            initialize();
+
+        } else {
+            System.out.println("No Deck Selected");
+        }
+
+    }
+
+    public void onShowDeck(ActionEvent event) {
+        if (this.selectedDeck != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
+            try {
+                Parent root = loader.load();
+                PlayerController controller = loader.getController();
+                controller.initPlayer(selectedDeck);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No selected deck Available");
         }
     }
 
