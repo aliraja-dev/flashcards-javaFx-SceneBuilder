@@ -21,7 +21,7 @@
          <buttons>
             <Button fx:id="addDeck" mnemonicParsing="false" onAction="#addDeck" text="Add deck" />
             <Button mnemonicParsing="false" onAction="#onDeleteDeck" text="Delete" />
-            <Button mnemonicParsing="false" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#onEditDeck" text="Edit" />
             <Button mnemonicParsing="false" onAction="#onShowDeck" text="Show" />
          </buttons>
       </ButtonBar>

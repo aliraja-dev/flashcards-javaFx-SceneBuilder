@@ -23,7 +23,7 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label fx:id="questionLabel" layoutX="8.0" prefHeight="301.0" prefWidth="387.0" text="Question here" textAlignment="CENTER" />
+                              <Label fx:id="questionLabel" layoutX="8.0" prefHeight="301.0" prefWidth="387.0" text="No card selected" textAlignment="CENTER" />
                            </children>
                         </AnchorPane>
                      </items>

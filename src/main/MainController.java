@@ -99,23 +99,24 @@ public class MainController {
      * @param primaryStage
      * @param deck
      */
-    public void onEditDeck(Stage primaryStage, Deck deck) {
-        // try {
-        // FXMLLoader loader = new
-        // FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
-        // Parent root = loader.load();
-        // AddEditDeckController addEditDeckController = loader.getController();
-        // Stage modal = new Stage();
-        // modal.setTitle("Edit Deck");
-        // modal.initOwner(primaryStage);
-        // modal.initModality(Modality.APPLICATION_MODAL);
-        // modal.setScene(new Scene(root));
-        // addEditDeckController.initModal(modal, deck);
-        // modal.showAndWait();
-        // initialize();
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
+    public void onEditDeck(ActionEvent event) {
+        if (this.selectedDeck != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
+                Parent root = loader.load();
+                AddEditDeckController addEditDeckController = loader.getController();
+                Stage modal = new Stage();
+                modal.setTitle("Edit Deck");
+                modal.initOwner(primaryStage);
+                modal.initModality(Modality.APPLICATION_MODAL);
+                modal.setScene(new Scene(root));
+                addEditDeckController.initModal(modal, this.selectedDeck);
+                modal.showAndWait();
+                initialize();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onDeleteDeck(ActionEvent event) {

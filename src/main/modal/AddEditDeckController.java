@@ -30,26 +30,29 @@ public class AddEditDeckController {
         // check if its a new deck or old deck
         if (this.deck != null) {
             // todo implement for edit
-            ArrayList<Deck> tempDecks = ds.getDecks();
+            System.out.println("Edit Deck" + this.deck.toString());
+            ArrayList<Deck> tempDecks = this.ds.getDecks();
             for (Deck d : tempDecks) {
                 if (d.getTitleOfDeck().equals(this.deck.getTitleOfDeck())) {
-                    d.setTitle(this.addTitleField.getText());
+                    System.out.println("Editing this deck " + d.toString());
                     tempDecks.remove(d);
+                    d.setTitle(this.addTitleField.getText());
+                    tempDecks.add(d);
+                    break;
                 }
             }
             this.ds.setDecks(tempDecks);
+            System.out.println("Edited Decks " + tempDecks.toString());
             modal.close();
 
-        } else {
-            System.out.println("Saving");
-            DataService ds = DataService.getInstance();
+        } else if (this.deck == null) {
+            System.out.println("Creating new Deck");
             // read from file all decks, then add new deck to the list
-            ArrayList<Deck> tempDecks = ds.getDecks();
+            ArrayList<Deck> tempDecks = this.ds.getDecks();
             tempDecks.add(new Deck(addTitleField.getText()));
             System.out.println("Saving " + tempDecks);
-            ds.setDecks(tempDecks);
+            this.ds.setDecks(tempDecks);
             modal.close();
-
         }
 
     }
