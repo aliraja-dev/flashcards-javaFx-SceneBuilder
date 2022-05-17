@@ -48,7 +48,7 @@ public class MainController {
             }
             // * converted ArrayList to ObservableList
             ObservableList<String> observableList = FXCollections.observableList(titles);
-            deckList.getItems().addAll(observableList);
+            deckList.getItems().setAll(observableList);
         } else {
             System.out.println("No decks found");
             deckList.setPlaceholder(new Label("No decks found"));
@@ -94,13 +94,12 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
             Parent root = loader.load();
             AddEditDeckController addEditDeckController = loader.getController();
-
             Stage modal = new Stage();
             modal.setTitle("Add Deck");
             modal.initOwner(primaryStage);
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.setScene(new Scene(root));
-            addEditDeckController.initStage(modal);
+            addEditDeckController.initModal(modal);
             modal.showAndWait();
             initialize();
         } catch (Exception e) {
