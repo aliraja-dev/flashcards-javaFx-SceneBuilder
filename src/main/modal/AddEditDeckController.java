@@ -33,6 +33,7 @@ public class AddEditDeckController {
     public void onCancel(ActionEvent event) {
         System.out.println("Cancelling");
         // todo implement cancel
+        modal.close();
     }
 
     public String getDeckName() {

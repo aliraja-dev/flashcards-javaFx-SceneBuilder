@@ -12,14 +12,18 @@ import main.modal.AddEditDeckController;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/main.fxml"));
-        Parent root = loader.load();
-        MainController controller = loader.getController();
-        controller.setPrimaryStage(primaryStage);
-        primaryStage.setTitle("Flash cards");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/main.fxml"));
+            Parent root = loader.load();
+            MainController controller = loader.getController();
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Flash cards");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

@@ -37,7 +37,7 @@ public class Deck implements Serializable {
     }
 
     public ArrayList<Card> getCards() {
-        return cards;
+        return this.cards;
         // todo read from file
     }
 
@@ -49,16 +49,16 @@ public class Deck implements Serializable {
         return this.cards.isEmpty();
     }
 
-    public int size() {
+    public int cardsSize() {
         return this.cards.size();
     }
 
-    public boolean contains(Card card) {
+    public boolean containsCard(Card card) {
         return this.cards.contains(card);
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleOfDeck() {
+        return this.title;
     }
 
     public void setTitle(String title) {
