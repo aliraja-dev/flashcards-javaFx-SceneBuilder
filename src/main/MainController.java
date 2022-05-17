@@ -40,7 +40,7 @@ public class MainController {
     public void initialize() {
         this.decks = this.ds.getDecks();
 
-        if (this.decks != null) {
+        if (this.decks != null && !this.decks.isEmpty()) {
             System.out.println("Decks from file " + decks);
             // ! Extract titles of decks and assign to ListView
             ArrayList<String> titles = new ArrayList<String>();
@@ -52,7 +52,7 @@ public class MainController {
             deckList.getItems().setAll(observableList);
         } else {
             System.out.println("No decks found");
-            deckList.setPlaceholder(new Label("No decks found"));
+            deckList.setPlaceholder(new Label("Add a deck to start learning"));
         }
 
         attachEventHandlers();
