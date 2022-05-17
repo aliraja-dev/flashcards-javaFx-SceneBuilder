@@ -88,7 +88,7 @@ public class EditorController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
                 Parent root = loader.load();
                 PlayerController controller = loader.getController();
-                controller.initPlayer(revisedDeck, false);
+                controller.initPlayer(revisedDeck);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -110,8 +110,13 @@ public class EditorController {
             // * Read from File
             ArrayList<Deck> tempDecks = this.ds.getDecks();
             // * find using old deck in the tempDecks and then replace with revisedDeck
-            int index = tempDecks.indexOf(this.deck);
-            tempDecks.set(index, revisedDeck);
+            for (Deck d : tempDecks) {
+                if (d.getTitleOfDeck().equals(this.deck.getTitleOfDeck())) {
+                    tempDecks.remove(d);
+                    tempDecks.add(revisedDeck);
+                    break;
+                }
+            }
 
             // * Save to File
             this.ds.setDecks(tempDecks);
@@ -119,7 +124,7 @@ public class EditorController {
             try {
                 Parent root = loader.load();
                 PlayerController controller = loader.getController();
-                controller.initPlayer(revisedDeck, true);
+                controller.initPlayer(revisedDeck);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);

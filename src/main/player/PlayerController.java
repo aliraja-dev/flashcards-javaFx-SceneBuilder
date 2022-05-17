@@ -120,24 +120,6 @@ public class PlayerController {
         }
     }
 
-    /**
-     * Initialize the PlayerController after Saving New CARD
-     * 
-     * @param deck
-     * @param updated
-     */
-    public void initPlayer(Deck deck, boolean updated) {
-        this.deck = deck;
-        this.updated = updated;
-        System.out.println("Revised DECK " + deck.toString());
-        playerTitle.setText(deck.getTitleOfDeck());
-        // todo commented below line
-        // cardList.getItems().addAll(deck.getCards());
-        cardList.setPlaceholder(new Label("No cards found"));
-
-        attachEventHandlers();
-    }
-
     // * attach event handlers to card items in list
     public void attachEventHandlers() {
         cardList.setOnMouseClicked(event -> {
