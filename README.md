@@ -4,13 +4,21 @@
 
 ![homepage](images/mainScene.png)
 
-#### Add, Edit & Delete Cards in a Deck
+#### Add or Edit Cards in a Deck
 
 ![homepage](images/editorScene.png)
 
 #### Play cards in a deck
 
 ![homepage](images/playerScene.png)
+
+#### Show Answer
+
+![homepage](images/showAnswer.png)
+
+#### Add new Deck
+
+![homepage](images/addNewDeck.png)
 
 ## Getting Started
 

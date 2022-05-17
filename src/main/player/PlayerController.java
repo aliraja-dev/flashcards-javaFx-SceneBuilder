@@ -25,7 +25,7 @@ public class PlayerController {
     private boolean showAnswer = false;
     private Card selectedCard;
     private Deck deck;
-    private boolean updated;
+
     @FXML
     Label playerTitle;
     @FXML
@@ -134,7 +134,6 @@ public class PlayerController {
         });
     }
 
-    // TODO check it
     public void toggleAnswer(ActionEvent event) {
         showAnswer = !showAnswer;
         if (showAnswer && selectedCard != null) {
@@ -148,7 +147,6 @@ public class PlayerController {
         }
     }
 
-    // todo check it
     public void toggleAnswer() {
         showAnswer = !showAnswer;
         toggleAnswerBtn.setText("Show Answer");
