@@ -71,11 +71,12 @@ public class EditorController {
             // * Read from File
             ArrayList<Deck> tempDecks = this.ds.getDecks();
             // * find using old deck in the tempDecks and then replace with revisedDeck
-            int index = tempDecks.indexOf(this.deck);
-            if (index != -1) {
-                tempDecks.set(index, revisedDeck);
-            } else {
-                System.out.println("Error: Deck not found");
+            for (Deck d : tempDecks) {
+                if (d.getTitleOfDeck().equals(this.deck.getTitleOfDeck())) {
+                    tempDecks.remove(d);
+                    tempDecks.add(revisedDeck);
+                    break;
+                }
             }
 
             // * Save to File
