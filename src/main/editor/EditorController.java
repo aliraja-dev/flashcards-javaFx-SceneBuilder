@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
+
 import javafx.stage.Stage;
 import main.player.PlayerController;
 import models.Card;
@@ -18,7 +18,7 @@ import models.Deck;
 import services.DataService;
 
 public class EditorController {
-    private Parent root;
+
     private Stage stage;
     private Scene scene;
     private Deck deck;
@@ -26,7 +26,7 @@ public class EditorController {
     private String answer;
     private Card selectedCard;
     private DataService ds = DataService.getInstance();
-    private ArrayList<Deck> decks = ds.getDecks();
+
     @FXML
     TextArea questionTextArea;
     @FXML
@@ -38,10 +38,11 @@ public class EditorController {
         // todo implement back to deck from the editor
     }
 
-    public void switchToPlayer(ActionEvent event) throws Exception {
+    // todo on Back click from editor, go back to PlayerController
+    public void switchToPlayer(ActionEvent event) {
         System.out.println("Switch to player");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
             Parent root = loader.load();
             PlayerController controller = loader.getController();
             controller.initPlayer(this.deck);
@@ -58,19 +59,35 @@ public class EditorController {
         // * implement Save Card
         this.question = questionTextArea.getText();
         this.answer = answerTextArea.getText();
-        if (selectedCard == null) {
+        if (this.selectedCard == null) {
             System.out.println("New card");
-            this.deck.addCard(new Card(this.question, this.answer));
-            System.out.println("Saved card " + this.question + " " + this.answer);
-            // // update Deck in File
-            // int indexOfDeck = this.decks.indexOf(this.deck);
-            // this.decks.set(indexOfDeck, this.deck);
-            // this.ds.setDecks(this.decks);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
+            // todo Create a Revised Deck, then read all decks from file, find this deck in
+            // there, replace with revised deck, then save it to file again
+
+            // * creating revised deck with new card in it
+            Deck revisedDeck = this.deck;
+            revisedDeck.addCard(new Card(this.question, this.answer));
+            System.out.println("revised deck: " + revisedDeck.toString());
+            // * Read from File
+            ArrayList<Deck> tempDecks = this.ds.getDecks();
+            // * find using old deck in the tempDecks and then replace with revisedDeck
+            int index = tempDecks.indexOf(this.deck);
+            if (index != -1) {
+                tempDecks.set(index, revisedDeck);
+            } else {
+                System.out.println("Error: Deck not found");
+            }
+
+            // * Save to File
+            this.ds.setDecks(tempDecks);
+            /**
+             * return to Player Controller
+             */
             try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
                 Parent root = loader.load();
                 PlayerController controller = loader.getController();
-                controller.initPlayer(this.deck, true);
+                controller.initPlayer(revisedDeck, false);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -78,20 +95,30 @@ public class EditorController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (selectedCard != null) {
-            System.out.println("Update card");
+        } else if (this.selectedCard != null) {
+            /**
+             * Update the card
+             */
+
+            System.out.println("Edit card");
             ArrayList<Card> cards = this.deck.getCards();
-            int index = cards.indexOf(selectedCard);
-            cards.set(index, new Card(this.question, this.answer));
-            // update Deck in File
-            // int indexOfDeck = this.decks.indexOf(this.deck);
-            // this.decks.set(indexOfDeck, this.deck);
-            // this.ds.setDecks(this.decks);
+            int indexOfCard = cards.indexOf(selectedCard);
+            cards.set(indexOfCard, new Card(this.question, this.answer));
+            this.deck.setCards(cards);
+            Deck revisedDeck = this.deck;
+            // * Read from File
+            ArrayList<Deck> tempDecks = this.ds.getDecks();
+            // * find using old deck in the tempDecks and then replace with revisedDeck
+            int index = tempDecks.indexOf(this.deck);
+            tempDecks.set(index, revisedDeck);
+
+            // * Save to File
+            this.ds.setDecks(tempDecks);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/player.fxml"));
             try {
                 Parent root = loader.load();
                 PlayerController controller = loader.getController();
-                controller.initPlayer(this.deck, true);
+                controller.initPlayer(revisedDeck, true);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -102,6 +129,12 @@ public class EditorController {
         }
     }
 
+    /**
+     * To Edit a Card
+     * 
+     * @param deck
+     * @param selectedCard
+     */
     public void initEditor(Deck deck, Card selectedCard) {
         // todo implement init editor
         this.deck = deck;
@@ -113,11 +146,17 @@ public class EditorController {
         mainLabel.setText("Edit Card");
     }
 
+    /**
+     * To Create a New Card
+     * 
+     * @param deck
+     */
     public void initEditor(Deck deck) {
         // * Loads the editor to create a new card
         this.deck = deck;
         this.question = "";
         this.answer = "";
+        this.selectedCard = null;
         questionTextArea.setText(this.question);
         answerTextArea.setText(this.answer);
         mainLabel.setText("Create New Card");

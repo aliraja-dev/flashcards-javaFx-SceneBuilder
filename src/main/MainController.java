@@ -40,19 +40,15 @@ public class MainController {
         this.decks = this.ds.getDecks();
 
         if (this.decks != null) {
-            System.out.println(decks);
-            // TODO populate listview with Titles only
+            System.out.println("Decks from file " + decks);
+            // ! Extract titles of decks and assign to ListView
             ArrayList<String> titles = new ArrayList<String>();
             for (Deck deck : this.decks) {
                 titles.add(deck.getTitleOfDeck());
             }
-            System.out.println(titles);
-
-            // todo convert arraylist to observable list
-
+            // * converted ArrayList to ObservableList
             ObservableList<String> observableList = FXCollections.observableList(titles);
             deckList.getItems().addAll(observableList);
-
         } else {
             System.out.println("No decks found");
             deckList.setPlaceholder(new Label("No decks found"));
@@ -62,14 +58,10 @@ public class MainController {
     }
 
     public void attachEventHandlers() {
+        // * Do this on MouseClick on ListView
         deckList.setOnMouseClicked(event -> {
             if (this.decks != null) {
                 String title = deckList.getSelectionModel().getSelectedItem();
-                // System.out.println(deck.getTitle() != null ? deck.getTitle() : "No deck
-                // Available");
-
-                // todo check the title in the decks arraylist and send that as deck to the
-                // player controller
                 Deck selectedDeck = this.decks.stream().filter(deck -> title.equals(deck.getTitleOfDeck())).findAny()
                         .orElse(null);
 
@@ -78,7 +70,6 @@ public class MainController {
                     try {
                         Parent root = loader.load();
                         PlayerController controller = loader.getController();
-
                         controller.initPlayer(selectedDeck);
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
@@ -88,14 +79,16 @@ public class MainController {
                         e.printStackTrace();
                     }
                 } else {
-                    System.out.println("No deck selected");
+                    System.out.println("No selected deck Available");
                 }
+            } else {
+                System.out.println("No Decks Available");
             }
         });
     }
 
     public void addEditDeck(ActionEvent event) {
-        // todo show modal to add / edit deck name
+        // todo check again
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/addEditDeck.fxml"));
@@ -115,6 +108,7 @@ public class MainController {
         }
     }
 
+    // TODO check this method again
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }

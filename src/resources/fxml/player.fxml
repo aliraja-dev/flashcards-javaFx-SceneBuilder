@@ -45,7 +45,7 @@
             <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" text="Add Card" />
          </buttons>
       </ButtonBar>
-      <Label fx:id="deckTitle" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
+      <Label fx:id="playerTitle" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
          <font>
             <Font size="21.0" />
          </font>

@@ -1,5 +1,9 @@
 package main.player;
 
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.editor.EditorController;
 import models.Card;
@@ -24,24 +27,32 @@ public class PlayerController {
     private Deck deck;
     private boolean updated;
     @FXML
-    Label deckTitle;
+    Label playerTitle;
     @FXML
-    ListView<Card> cardList;
+    ListView<String> cardList;
     @FXML
     Label questionLabel;
     @FXML
     Button toggleAnswerBtn;
 
-    public void switchToMain(ActionEvent event) throws Exception {
+    /**
+     * Return to Main Screen
+     * 
+     * @param event
+     */
 
-        // todo implement update to update decks in the main screen after edit has been
-        // made to a deck
+    public void switchToMain(ActionEvent event) {
+
         System.out.println("Switch to main");
-        root = FXMLLoader.load(getClass().getResource("/resources/fxml/main.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        try {
+            root = FXMLLoader.load(getClass().getResource("/resources/fxml/main.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -53,7 +64,7 @@ public class PlayerController {
             try {
                 root = loader.load();
                 EditorController controller = loader.getController();
-                controller.initEditor(deck, selectedCard);
+                controller.initEditor(deck, this.selectedCard);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -86,12 +97,22 @@ public class PlayerController {
 
     }
 
-    // Loading Player from Main Controller
+    /**
+     * Initialize the PlayerController
+     * 
+     * @param deck
+     */
     public void initPlayer(Deck deck) {
         this.deck = deck;
         if (deck != null) {
-            deckTitle.setText(deck.getTitleOfDeck());
-            cardList.getItems().addAll(deck.getCards());
+            playerTitle.setText(deck.getTitleOfDeck());
+            // * Populate ListView with Questions from Deck
+            ArrayList<String> questions = new ArrayList<String>();
+            for (Card card : deck.getCards()) {
+                questions.add(card.getQuestion());
+            }
+            ObservableList<String> observableList = FXCollections.observableArrayList(questions);
+            cardList.getItems().addAll(observableList);
             attachEventHandlers();
         } else {
             cardList.setPlaceholder(new Label("No cards found"));
@@ -99,13 +120,19 @@ public class PlayerController {
         }
     }
 
-    // ! updated deck from editor
+    /**
+     * Initialize the PlayerController after Saving New CARD
+     * 
+     * @param deck
+     * @param updated
+     */
     public void initPlayer(Deck deck, boolean updated) {
         this.deck = deck;
         this.updated = updated;
         System.out.println("Revised DECK " + deck.toString());
-        deckTitle.setText(deck.getTitleOfDeck());
-        cardList.getItems().addAll(deck.getCards());
+        playerTitle.setText(deck.getTitleOfDeck());
+        // todo commented below line
+        // cardList.getItems().addAll(deck.getCards());
         cardList.setPlaceholder(new Label("No cards found"));
 
         attachEventHandlers();
@@ -114,14 +141,18 @@ public class PlayerController {
     // * attach event handlers to card items in list
     public void attachEventHandlers() {
         cardList.setOnMouseClicked(event -> {
-            Card card = cardList.getSelectionModel().getSelectedItem();
-            System.out.println(card.getQuestion());
-            selectedCard = card;
-            questionLabel.setText(card.getQuestion());
+            String selectedQuestion = cardList.getSelectionModel().getSelectedItem();
+            System.out.println(selectedQuestion);
+            // * find the selected card using the selected Question from the card List
+            Card selectedCard = this.deck.getCards().stream()
+                    .filter(card -> card.getQuestion().equals(selectedQuestion)).findAny().orElse(null);
+            this.selectedCard = selectedCard;
+            questionLabel.setText(selectedCard.getQuestion());
             this.toggleAnswer();
         });
     }
 
+    // TODO check it
     public void toggleAnswer(ActionEvent event) {
         showAnswer = !showAnswer;
         if (showAnswer && selectedCard != null) {
@@ -135,6 +166,7 @@ public class PlayerController {
         }
     }
 
+    // todo check it
     public void toggleAnswer() {
         showAnswer = !showAnswer;
         toggleAnswerBtn.setText("Show Answer");
