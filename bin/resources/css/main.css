@@ -1,0 +1,13 @@
+.root{
+    -fx-font-family: "serif";
+    -fx-font-style: normal;
+    -fx-font-weight: bolder;
+
+}
+
+.vbox{
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+

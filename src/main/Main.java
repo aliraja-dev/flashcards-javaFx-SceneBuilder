@@ -17,7 +17,7 @@ public class Main extends Application {
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Flash cards");
             Scene scene = new Scene(root);
-
+            scene.getStylesheets().add("/resources/css/main.css");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
