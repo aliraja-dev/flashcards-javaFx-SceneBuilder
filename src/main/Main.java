@@ -16,7 +16,9 @@ public class Main extends Application {
             MainController controller = loader.getController();
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Flash cards");
-            primaryStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+
+            primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
