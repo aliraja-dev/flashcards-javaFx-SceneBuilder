@@ -1,22 +1,12 @@
 package services;
 
-import models.Deck;
-
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import javafx.scene.chart.PieChart.Data;
-
-import java.util.ArrayList;
-
+import models.Deck;
 import models.Card;
 
 public class DataService {
