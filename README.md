@@ -22,6 +22,14 @@
 
 ## Getting Started
 
+Run main method in Main.java file.
+
+## Project Backlog
+
+Add CSS stylesheets
+Add Key bindings for shortcuts
+Add Next Button Support to move btw cards
+
 ### Revisions to launch.json
 
 Using Vs code update the "vmArgs": "--module-path <path to jar files of Javafx> --add-modules=javafx.controls,javafx.fxml"
