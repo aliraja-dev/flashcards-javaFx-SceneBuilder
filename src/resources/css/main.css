@@ -2,7 +2,8 @@
     -fx-font-family: "serif";
     -fx-font-style: normal;
     -fx-font-weight: bolder;
-
+    -fx-background-color: gray;
+    -fx-font-size: 20px;
 }
 
 .vbox{
@@ -11,3 +12,7 @@
     -fx-alignment: center;
 }
 
+.button{
+    -fx-background-color:blue;
+    -fx-text-fill:white;
+}

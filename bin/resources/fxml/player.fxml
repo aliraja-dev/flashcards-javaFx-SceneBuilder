@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -8,47 +9,75 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.player.PlayerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.player.PlayerController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="48.0" prefHeight="351.0" prefWidth="586.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="109.0" layoutY="124.0" prefHeight="610.0" prefWidth="983.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="179.0">
                <children>
-                  <ListView fx:id="cardList" layoutY="4.0" prefHeight="342.0" prefWidth="171.0" />
+                  <ListView fx:id="cardList" layoutY="4.0" prefHeight="608.0" prefWidth="289.0" styleClass="card-list">
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding></ListView>
                </children>
             </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="375.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="926.0">
                <children>
-                  <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="303.0" prefWidth="389.0">
+                  <SplitPane layoutX="26.0" layoutY="38.0" orientation="VERTICAL" prefHeight="498.0" prefWidth="640.0">
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Label fx:id="questionLabel" layoutX="8.0" prefHeight="301.0" prefWidth="387.0" text="No card selected" textAlignment="CENTER" />
+                              <Label fx:id="questionLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="37.0" lineSpacing="10.0" prefHeight="420.0" prefWidth="560.0" styleClass="card-label" text="No card selected" textAlignment="CENTER" wrapText="true">
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </items>
                   </SplitPane>
-                  <ButtonBar layoutX="6.0" layoutY="309.0" prefHeight="40.0" prefWidth="387.0">
+                  <ButtonBar layoutX="266.0" layoutY="536.0" prefHeight="64.0" prefWidth="400.0">
                      <buttons>
-                        <Button fx:id="toggleAnswerBtn" mnemonicParsing="false" onAction="#toggleAnswer" prefHeight="25.0" prefWidth="110.0" text="Show answer" />
-                        <Button mnemonicParsing="false" text="Next" />
+                        <Button fx:id="toggleAnswerBtn" mnemonicParsing="false" onAction="#toggleAnswer" prefHeight="36.0" prefWidth="148.0" text="Show answer">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="148.0" text="Next (WIP)">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
                      </buttons>
                   </ButtonBar>
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <ButtonBar layoutX="416.0" layoutY="6.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
+      <ButtonBar layoutX="452.0" layoutY="48.0" prefHeight="64.0" prefWidth="640.0" AnchorPane.rightAnchor="108.0">
          <buttons>
-            <Button fx:id="backToMain" mnemonicParsing="false" onAction="#switchToMain" text="Back" />
-            <Button mnemonicParsing="false" onAction="#onDeleteCard" text="Delete" />
-            <Button fx:id="editCard" mnemonicParsing="false" onAction="#switchToEditor" prefHeight="25.0" prefWidth="284.0" text="Edit" />
-            <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" text="Add Card" />
+            <Button fx:id="backToMain" mnemonicParsing="false" onAction="#switchToMain" prefHeight="36.0" prefWidth="148.0" text="Back">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#onDeleteCard" prefHeight="36.0" prefWidth="148.0" text="Delete">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="editCard" mnemonicParsing="false" onAction="#switchToEditor" prefHeight="36.0" prefWidth="148.0" text="Edit">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="addCard" mnemonicParsing="false" onAction="#addCardToDeck" prefHeight="36.0" prefWidth="148.0" text="Add Card">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </buttons>
       </ButtonBar>
-      <Label fx:id="playerTitle" layoutX="26.0" layoutY="12.0" prefHeight="27.0" prefWidth="143.0" text="Deck Title here">
+      <Label fx:id="playerTitle" layoutX="61.0" layoutY="56.0" prefHeight="36.0" prefWidth="360.0" text="Deck Title here">
          <font>
-            <Font size="21.0" />
+            <Font size="24.0" />
          </font>
       </Label>
    </children>

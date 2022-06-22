@@ -50,6 +50,7 @@ public class PlayerController {
             root = FXMLLoader.load(getClass().getResource("/resources/fxml/main.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+            scene.getStylesheets().add("/resources/css/main.css");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

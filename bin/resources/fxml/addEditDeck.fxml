@@ -7,17 +7,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.modal.AddEditDeckController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.modal.AddEditDeckController">
    <children>
-      <VBox layoutX="11.0" layoutY="14.0" prefHeight="165.0" prefWidth="276.0">
+      <VBox layoutX="11.0" layoutY="14.0" prefHeight="274.0" prefWidth="474.0">
          <children>
-            <Label text="Deck name" />
-            <TextField fx:id="addTitleField" prefHeight="25.0" prefWidth="270.0" promptText="Add name of deck" />
-            <HBox alignment="TOP_RIGHT" prefHeight="15.0" prefWidth="236.0">
+            <Label prefHeight="48.0" prefWidth="200.0" text="Deck name">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <TextField fx:id="addTitleField" prefHeight="48.0" prefWidth="270.0" promptText="Add name of deck">
+               <VBox.margin>
+                  <Insets bottom="24.0" />
+               </VBox.margin></TextField>
+            <HBox alignment="TOP_RIGHT" prefHeight="55.0" prefWidth="434.0">
                <children>
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancel" text="cancel" />
-                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSave" text="save" />
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancel" text="cancel" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onSave" text="save" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding></Button>
                </children>
             </HBox>
          </children>

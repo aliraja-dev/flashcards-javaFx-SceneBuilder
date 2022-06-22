@@ -8,21 +8,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
-      <TextField fx:id="searchField" layoutX="117.0" layoutY="65.0" prefHeight="30.0" prefWidth="400.0" promptText="Search decks by title" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="64.0" />
-      <ListView fx:id="deckList" layoutX="19.0" layoutY="125.0" prefHeight="249.0" prefWidth="555.0" AnchorPane.topAnchor="120.0" />
-      <Label layoutX="36.0" layoutY="22.0" prefHeight="27.0" prefWidth="143.0" text="Flash Card App">
+      <TextField fx:id="searchField" layoutX="225.0" layoutY="139.0" prefHeight="30.0" prefWidth="747.0" promptText="Search decks by title -  Under Construction" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="228.0" AnchorPane.topAnchor="139.0">
          <font>
-            <Font size="21.0" />
+            <Font size="20.0" />
+         </font></TextField>
+      <ListView fx:id="deckList" layoutX="153.0" layoutY="193.0" prefHeight="470.0" prefWidth="891.0" styleClass="deck-list" />
+      <Label layoutX="82.0" layoutY="30.0" prefHeight="36.0" prefWidth="360.0" text="FlashCards - Maxx Potential">
+         <font>
+            <Font size="24.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="426.0" layoutY="16.0" prefHeight="40.0" prefWidth="122.0" AnchorPane.rightAnchor="24.0">
+      <ButtonBar layoutX="486.0" layoutY="13.0" prefHeight="64.0" prefWidth="640.0" AnchorPane.rightAnchor="90.0">
          <buttons>
-            <Button fx:id="addDeck" mnemonicParsing="false" onAction="#addDeck" text="Add deck" />
-            <Button mnemonicParsing="false" onAction="#onDeleteDeck" text="Delete" />
-            <Button mnemonicParsing="false" onAction="#onEditDeck" text="Edit" />
-            <Button mnemonicParsing="false" onAction="#onShowDeck" text="Show" />
+            <Button fx:id="addDeck" mnemonicParsing="false" onAction="#addDeck" prefHeight="36.0" prefWidth="175.0" text="Add deck">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#onDeleteDeck" prefHeight="36.0" text="Delete">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onEditDeck" prefHeight="36.0" text="Edit">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#onShowDeck" prefHeight="36.0" text="Show">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </buttons>
       </ButtonBar>
    </children>
