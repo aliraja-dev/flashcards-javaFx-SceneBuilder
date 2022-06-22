@@ -15,12 +15,15 @@
          <children>
             <Label prefHeight="48.0" prefWidth="200.0" text="Deck name">
                <font>
-                  <Font size="20.0" />
+                  <Font size="24.0" />
                </font></Label>
             <TextField fx:id="addTitleField" prefHeight="48.0" prefWidth="270.0" promptText="Add name of deck">
                <VBox.margin>
                   <Insets bottom="24.0" />
-               </VBox.margin></TextField>
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
             <HBox alignment="TOP_RIGHT" prefHeight="55.0" prefWidth="434.0">
                <children>
                   <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancel" text="cancel" textAlignment="CENTER">
